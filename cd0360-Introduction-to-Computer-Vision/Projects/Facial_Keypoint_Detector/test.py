@@ -2,7 +2,7 @@ import torch
 import torch.optim as optim
 import numpy as np
 from dataset import FacialKeypointsDataset, Rescale, RandomCrop, Normalize, ToTensor
-from models import Net
+from models import NaimishNet
 import matplotlib
 matplotlib.use('TkAgg')
 import matplotlib.pyplot as plt
@@ -26,7 +26,7 @@ if __name__ == "__main__":
     train_loader, test_loader = create_train_test_dataloader(train_dataset, test_dataset,
                                                              batch_size=10, shuffle=True, num_workers=0)
 
-    model = Net()
+    model = NaimishNet()
     model_dir = 'saved_models/'
     model_name = 'keypoints_model_1.pt'
     model.load_state_dict(torch.load(model_dir + model_name))

@@ -4,14 +4,14 @@ import torch
 from torch.autograd import Variable
 import torch.nn as nn
 import torch.nn.functional as F
-# can use the below import should you choose to initialize the weights of your Net
+# can use the below import should you choose to initialize the weights of your NaimishNet
 import torch.nn.init as I
 
 
-class Net(nn.Module):
+class NaimishNet(nn.Module):
 
     def __init__(self):
-        super(Net, self).__init__()
+        super(NaimishNet, self).__init__()
 
         ## TODO: Define all the layers of this CNN, the only requirements are:
         ## 1. This network takes in a square (same width and height), grayscale image as input

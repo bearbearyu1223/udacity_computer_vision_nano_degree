@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 import cv2
 import torch
-from models import Net
+from models import NaimishNet
 
 
 if __name__ == "__main__":
@@ -29,7 +29,7 @@ if __name__ == "__main__":
     plt.imshow(image_with_detections)
     plt.show()
 
-    model = Net()
+    model = NaimishNet()
     model.load_state_dict(torch.load("saved_models/keypoints_model_1.pt"))
     model.eval()
 
