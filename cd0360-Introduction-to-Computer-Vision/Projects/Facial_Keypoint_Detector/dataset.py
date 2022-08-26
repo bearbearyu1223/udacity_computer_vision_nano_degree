@@ -20,13 +20,6 @@ def show_keypoints(image, key_pts):
     plt.show()
 
 
-def rescale_linear(input_array, new_min, new_max):
-    old_min, old_max = np.min(input_array), np.max(input_array)
-    m = (new_max - new_min)/(old_max - old_min)
-    b = new_min - m * old_min
-    return m*input_array + b
-
-
 class FacialKeypointsDataset(Dataset):
     def __init__(self, csv_file_path, image_dir, transform=None):
         self.key_pts_frame = pd.read_csv(csv_file_path, engine="python")
@@ -60,7 +53,7 @@ class Normalize(object):
         image_copy = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
         image_copy = image_copy/255.0
 
-        key_pts_copy = rescale_linear(input_array=key_pts_copy, new_min=-1.0, new_max=1.0)
+        key_pts_copy = (key_pts_copy - 100.0) / 50.0
 
         return {"image": image_copy, "keypoints": key_pts_copy}
 
@@ -123,6 +116,7 @@ class ToTensor(object):
         # torch image: C X H X W
         image = image.transpose((2, 0, 1))
         return {"image": torch.from_numpy(image), "keypoints": torch.from_numpy(key_pts)}
+
 
 def test():
     root_dir = os.path.join(os.getcwd(), "data")
