@@ -74,7 +74,8 @@ def visualize_output(test_images, test_outputs, gt_pts=None, batch_size=10):
 
 
 def train(model, n_epochs, train_loader):
-    criterion = nn.MSELoss()
+    #criterion = nn.MSELoss()
+    criterion = nn.SmoothL1Loss()
     optimizer = optim.Adam(model.parameters(), lr=0.001, betas=(0.9, 0.999), eps=1e-08, weight_decay=0, amsgrad=False)
 
     model.train()
@@ -119,7 +120,7 @@ if __name__ == "__main__":
                                                              batch_size=batch_size, shuffle=True, num_workers=0)
     model = NaimishNet()
 
-    n_epochs = 5  # start small, and increase when you've decided on your model structure and hyperparams
+    n_epochs = 10  # start small, and increase when you've decided on your model structure and hyperparams
     train(model, n_epochs, train_loader)
     test_images, test_outputs, gt_pts = test_net_sample_output(test_loader, model)
     visualize_output(test_images, test_outputs, gt_pts)
