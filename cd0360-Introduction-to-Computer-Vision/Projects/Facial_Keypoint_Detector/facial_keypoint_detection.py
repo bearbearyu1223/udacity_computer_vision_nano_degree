@@ -30,7 +30,7 @@ if __name__ == "__main__":
     plt.show()
 
     model = NaimishNet()
-    model.load_state_dict(torch.load("saved_models/keypoints_model_1.pt"))
+    model.load_state_dict(torch.load("saved_models/checkpoint.pt"))
     model.eval()
 
     image_copy = np.copy(image)
